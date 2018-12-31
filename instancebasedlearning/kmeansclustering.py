@@ -1,6 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# uncomment if you use my style sheet standardsytle.mplstyle
+# for me it needs to be in ~/.config/matplotlib/stylelib.mplstyle; you also need the matplotlibrc.template in
+# ~/.config/matplotlib/
+
+# plt.style.use('standardstyle')
+
 
 N = 100
 varX = 0.5
@@ -41,6 +47,10 @@ class KMeansClustering(object):
 
         # just init the clusters
         fig, ax = plt.subplots(1, 2, figsize=(16, 8))
+        ax[0].set_xlabel("Alter (normed)")
+        ax[0].set_ylabel("Kredit (normed)")
+        ax[1].set_xlabel("Alter (normed)")
+        ax[1].set_ylabel("Kredit (normed)")
         ax[0].plot(clusters[0][:, 0], clusters[0][:, 1], '.')
         ax[0].plot(clusters[1][:, 0], clusters[1][:, 1], '.')
         ax[0].plot(clusters[2][:, 0], clusters[2][:, 1], '.')
@@ -65,12 +75,14 @@ class KMeansClustering(object):
         cid = fig.canvas.mpl_connect('button_press_event', lambda event: self.onclick(event, line_examples, scatter,
                                                                                       ax))
 
+        ax[1].set_title("Initialization")
+        plt.tight_layout()
         plt.show()
 
     def onclick(self, event, line_examples, scatter, axes):
         if self.state == 0:
             # calculate for each example the nearest cluster
-            axes[1].set_title("3. Calculate Nearest Neighbors")
+            axes[1].set_title("3. Calculated Nearest Neighbors")
             distances = np.zeros(shape=(len(self.examples[:, 0]), self.k))
             for j in range(self.k):
                 distances[:, j] = np.linalg.norm(self.examples - self.clustercenters[:, j], axis=1)

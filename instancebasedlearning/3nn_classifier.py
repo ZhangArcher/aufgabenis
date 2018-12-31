@@ -2,6 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
+# uncomment if you use my style sheet standardsytle.mplstyle
+# for me it needs to be in ~/.config/matplotlib/stylelib.mplstyle; you also need the matplotlibrc.template in
+# ~/.config/matplotlib/
+
+# plt.style.use('standardstyle')
+# plt.rcParams['legend.markerscale'] = 1.0
+
 bank_data = [
     [25, 40000, 'N'],
     [35, 60000, 'N'],
@@ -92,6 +99,9 @@ def plot_data_and_example(array, class_labels, x, maj_label, knn_indices):
         plt.plot((x[0], array[knn_indices[j]][0]), (x[1], array[knn_indices[j]][1]), '--', color='black', zorder=-1)
     # plot examples
     plt.scatter(array[:, 0], array[:, 1], c=get_color_from_class(class_labels), s=50, marker='o')
+    plt.xlabel("Alter (normed)")
+    plt.ylabel("Kredit (normed)")
+
     # plot example to be classified
     plt.scatter(x[0], x[1], c=get_color_from_class(maj_label), s=100, marker='*')
 
@@ -100,6 +110,7 @@ def plot_data_and_example(array, class_labels, x, maj_label, knn_indices):
                        Line2D([0], [0], marker='*', color=get_color_from_class(maj_label), label=maj_label, linestyle='None')
                        ]
     plt.legend(handles=legend_elements)
+    plt.tight_layout()
     plt.show()
 
 
@@ -143,5 +154,5 @@ def classify_and_plot_normalized(data, x, k):
     plot_data_and_example(array, class_labels, x, maj_class, knn_indices)
 
 
-classify_and_plot(bank_data, x=np.array([48, 142000]), k=3)
+# classify_and_plot(bank_data, x=np.array([48, 142000]), k=3)
 classify_and_plot_normalized(bank_data, x=np.array([48, 142000]), k=3)
