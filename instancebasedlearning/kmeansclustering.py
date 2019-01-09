@@ -72,7 +72,8 @@ class KMeansClustering(object):
 
         scatter = ax[1].scatter(clustercenters[0, :], clustercenters[1, :], c=self.c, marker='*', s=200)
 
-        cid = fig.canvas.mpl_connect('button_press_event', lambda event: self.onclick(event, line_examples, scatter,
+        cid = fig.canvas.mpl_connect('button_press_event',
+                                     lambda event: self.onclick(event, line_examples, scatter,
                                                                                       ax))
 
         ax[1].set_title("Initialization")

@@ -128,11 +128,9 @@ def classify_and_plot(data, x, k):
     plot_data_and_example(array, class_labels, x, maj_class, knn_indices)
 
 
-def find_min_and_max(attr_array, x):
-    appended_array = np.append(attr_array, [x], axis=0)
-
-    minarray = np.min(appended_array, axis=0)
-    maxarray = np.max(appended_array, axis=0)
+def find_min_and_max(attr_array):
+    minarray = np.min(attr_array, axis=0)
+    maxarray = np.max(attr_array, axis=0)
 
     return minarray, maxarray
 
@@ -140,7 +138,7 @@ def find_min_and_max(attr_array, x):
 def classify_and_plot_normalized(data, x, k):
     array, class_labels = parse_data_to_numpy_array(data)
 
-    minarray, maxarray = find_min_and_max(array, x)
+    minarray, maxarray = find_min_and_max(array)
     array = (array - minarray)/(maxarray - minarray)
     x = (x - minarray)/(maxarray - minarray)
 
